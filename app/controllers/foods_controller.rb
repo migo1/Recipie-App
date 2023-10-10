@@ -79,6 +79,6 @@ class FoodsController < ApplicationController
 
     return unless @food.nil?
 
-    redirect_to foods_path, notice: 'Not authorized to edit this friend'
+    redirect_to foods_path, notice: 'Not authorized to edit this food'
   end
 end
