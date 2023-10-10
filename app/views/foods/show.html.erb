@@ -24,3 +24,23 @@
     </div>
   </div>
 </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Recipes</th>
+      <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @food.recipe_foods.each_with_index do |recipe_food, index| %>
+    <tr>
+      <th scope="row"><%= index + 1 %></th>
+      <td><%= recipe_food.recipe.name %></td>
+      <td><%= recipe_food.quantity %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
