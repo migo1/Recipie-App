@@ -25,7 +25,7 @@ class RecipesController < ApplicationController
   def edit
     return if current_user
 
-    flash[:notice] = 'You must be logged in to add a new recipe.'
+    flash[:notice] = 'You must be logged in to add a edit recipe.'
     redirect_to root_path
   end
 
