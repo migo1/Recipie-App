@@ -1,0 +1,27 @@
+<% content_for :title, "#{@recipe.name}" %>
+
+<div class="row my-5">
+  <div class="col-md-12">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <h3 class="mb-0"><%= @recipe.name %></h3>
+        <div class="mb-1 text-body-secondary"><%= @recipe.created_at.strftime('%d %b %y') %></div>
+            <p class="card-text mb-ato">Preparation time: <%= @recipe.preparation_time %></p>
+            <p class="card-text mb-ato">Cooking time: <%= @recipe.cooking_time %></p>
+        <i class="d-inline-block mb-2 text-primary-emphasis">Created by: <%= @recipe.user.name %></i>
+        <div class="d-flex gap-5 mt-3">
+        <% if user_signed_in? && current_user.id == @recipe.user_id %>
+          <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %>
+        <% end %>
+          <%= link_to "Back to recipe", recipes_path %>
+        </div>
+        <% if user_signed_in? && current_user.id == @recipe.user_id %>
+          <%= button_to "Delete this recipe", @recipe, method: :delete, class:"btn btn-danger my-3" %>
+        <% end %>
+      </div>
+      <div class="col-auto d-none d-lg-block">
+        <img src="https://scalebranding.com/wp-content/uploads/2020/03/fun-food-logo-1080x1080.jpg" alt="logo" class="bd-placeholder-img" width="250" height="250" />
+      </div>
+    </div>
+  </div>
+</div>
