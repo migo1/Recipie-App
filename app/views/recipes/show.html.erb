@@ -11,12 +11,12 @@
         <i class="d-inline-block mb-2 text-primary-emphasis">Created by: <%= @recipe.user.name %></i>
         <div class="d-flex gap-5 mt-3">
         <% if user_signed_in? %>
-          <%= link_to "Edit this food", edit_recipe_path(@recipe) %>
+          <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %>
         <% end %>
-          <%= link_to "Back to foods", recipes_path %>
+          <%= link_to "Back to recipe", recipes_path %>
         </div>
         <% if user_signed_in? %>
-          <%= button_to "Delete this food", @recipe, method: :delete, class:"btn btn-danger my-3" %>
+          <%= button_to "Delete this recipe", @recipe, method: :delete, class:"btn btn-danger my-3" %>
         <% end %>
       </div>
       <div class="col-auto d-none d-lg-block">
