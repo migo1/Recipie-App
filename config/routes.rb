@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  # get 'shopping_lists/show'
+  get 'shopping_list', to: 'shopping_lists#show'
   resources :recipes do
     member do
       patch :toggle
-      get :generate_shopping_list
     end
   end
   resources :foods do 
