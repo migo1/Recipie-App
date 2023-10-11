@@ -28,6 +28,18 @@
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control mt-2" %>
       </div>
 
+          <div class="field form-group my-4">
+        <%= f.label :role %><br />
+        <label>
+          <%= f.radio_button :role, "admin" %>
+          Admin
+        </label>
+        <label>
+          <%= f.radio_button :role, "user" %>
+          User
+        </label>
+      </div>
+
       <div class="actions">
         <%= f.submit "Sign up", class:"btn btn-secondary btn-block mb-3" %>
       </div>

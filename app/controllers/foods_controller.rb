@@ -1,4 +1,6 @@
 class FoodsController < ApplicationController
+    load_and_authorize_resource 
+  # load_and_authorize_resource :food, through: :user
   before_action :set_food, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
   before_action :current_user!, only: %i[edit update destroy]
