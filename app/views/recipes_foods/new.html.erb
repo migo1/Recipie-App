@@ -1,0 +1,18 @@
+<%= form_with(model: @recipe_food, url: food_recipes_foods_path(@food)) do |form| %>
+
+  <%= form.hidden_field :food_id, value: @food.id %>
+
+  <div class="form-field my-3">
+  <%= form.label :recipe_id, style: "display: block" %>
+    <%= form.collection_select :recipe_id, @recipes, :id, :name, prompt: "Select a recipe", class: "form-control my-2 mb-2" %>
+  </div>
+
+   <div class="form-field my-3">
+    <%= form.label :quantity, style: "display: block" %>
+    <%= form.number_field :quantity, class:"form-control my-2" %>
+  </div>
+
+  <div>
+    <%= form.submit class:"btn btn-success" %>
+  </div>
+<% end %>
