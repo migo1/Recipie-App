@@ -1,7 +1,8 @@
 class RecipesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_recipe, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
-  before_action :current_user!, only: %i[edit update destroy]
+  # before_action :current_user!, only: %i[edit update destroy]
 
   # GET /recipes or /recipes.json
   def index
@@ -59,6 +60,7 @@ class RecipesController < ApplicationController
 
   # DELETE /recipes/1 or /recipes/1.json
   def destroy
+    @recipe.foods.destroy_all
     @recipe.destroy
 
     respond_to do |format|
@@ -79,11 +81,11 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public, :user_id)
   end
 
-  def current_user!
-    @recipe = current_user.recipes.find_by(id: params[:id])
+  # def current_user!
+  #   @recipe = current_user.recipes.find_by(id: params[:id])
 
-    return unless @recipe.nil?
+  #   return unless @recipe.nil?
 
-    redirect_to recipes_path, notice: 'Not authorized to edit this recipe'
-  end
+  #   redirect_to recipes_path, notice: 'Not authorized to edit this recipe'
+  # end
 end

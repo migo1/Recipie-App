@@ -1,9 +1,7 @@
 class FoodsController < ApplicationController
-    load_and_authorize_resource 
-  # load_and_authorize_resource :food, through: :user
+  load_and_authorize_resource 
   before_action :set_food, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
-  before_action :current_user!, only: %i[edit update destroy]
 
   # GET /foods or /foods.json
   def index
@@ -56,6 +54,7 @@ class FoodsController < ApplicationController
 
   # DELETE /foods/1 or /foods/1.json
   def destroy
+    @food.recipes.destroy_all
     @food.destroy
 
     respond_to do |format|
@@ -76,11 +75,11 @@ class FoodsController < ApplicationController
     params.require(:food).permit(:name, :measurement_unit, :price, :quantity, :user_id)
   end
 
-  def current_user!
-    @food = current_user.foods.find_by(id: params[:id])
+  # def current_user!
+  #   @food = current_user.foods.find_by(id: params[:id])
 
-    return unless @food.nil?
+  #   return unless @food.nil?
 
-    redirect_to foods_path, notice: 'Not authorized to edit this food'
-  end
+  #   redirect_to foods_path, notice: 'Not authorized to edit this food'
+  # end
 end
