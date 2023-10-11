@@ -1,5 +1,29 @@
 <% content_for :title, "#{@recipe.name}" %>
 
+<div class="row my-5 gap-3">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="col-md-6">
+      <% if can?(:edit, @recipe) %>
+        <%= link_to "Generate Shopping List", generate_shopping_list_recipe_path(@recipe), class: "btn btn-primary" %>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <% if can?(:edit, @recipe) %>
+        <%= link_to "New food", new_food_path, class:"btn btn-outline-secondary mt-3" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <% if can?(:edit, @recipe) %>
+      <%= button_to "Make #{@recipe.public ? 'private' : 'public'}", 
+        toggle_recipe_path(@recipe),
+        method: :patch,
+        class: "btn btn-primary" 
+      %>
+    <% end %>
+  </div>
+</div>
 <div class="row my-5">
   <div class="col-md-12">
     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -10,12 +34,12 @@
             <p class="card-text mb-ato">Cooking time: <%= @recipe.cooking_time %></p>
         <i class="d-inline-block mb-2 text-primary-emphasis">Created by: <%= @recipe.user.name %></i>
         <div class="d-flex gap-5 mt-3">
-        <% if can?(:edit, @food) %>
+        <% if can?(:edit, @recipe) %>
           <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %>
         <% end %>
           <%= link_to "Back to recipe", recipes_path %>
         </div>
-        <% if can?(:delete, @food) %>
+        <% if can?(:delete, @recipe) %>
           <%= button_to "Delete this recipe", @recipe, method: :delete, class:"btn btn-danger my-3" %>
         <% end %>
       </div>

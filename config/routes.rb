@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :recipes
+  resources :recipes do
+    member do
+      patch :toggle
+      get :generate_shopping_list
+    end
+  end
   resources :foods do 
     resources :recipes_foods, only: [:new, :create]
   end
