@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   load_and_authorize_resource
   before_action :set_recipe, only: %i[show edit update destroy]
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show public_recipes]
   # before_action :current_user!, only: %i[edit update destroy]
 
   # GET /recipes or /recipes.json
@@ -78,6 +78,12 @@ class RecipesController < ApplicationController
     @recipe.update(public: !@recipe.public)
     redirect_to @recipe, notice: "Recipe is now #{@recipe.public ? 'public' : 'private'}"
   end
+
+  def public_recipes
+  @public_recipes = Recipe.where(public: false).order(created_at: :desc)
+  # recipe = Recipe.find(params[:id])
+  # @total_food_items = recipe.foods.count
+end
 
   private
 
