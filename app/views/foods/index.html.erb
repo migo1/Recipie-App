@@ -6,7 +6,9 @@
 <%= link_to "New food", new_food_path, class:"btn btn-outline-secondary mt-3" %>
 <% end %>
 
-<div class="row my-5">
+
+
+<!--<div class="row my-5">
   <% @foods.each do |food| %>
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -23,4 +25,30 @@
       </div>
     </div>
   <% end %>
-</div>
+</div> -->
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Measurment unit</th>
+      <th scope="col">Unit Price</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @foods.each do |food| %>
+    <tr>
+      <td><%= food.name%></td>
+      <td><%= food.measurement_unit %></td>
+      <td><%= food.price %></td>
+      <td>
+        <% if can?(:delete, @food) %>
+          <%= button_to "Delete this food", @food, method: :delete, class:"btn btn-danger my-3" %>
+        <% end %>
+      <td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
