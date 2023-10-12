@@ -27,7 +27,7 @@
   <% end %>
 </div> -->
 
-<table class="table">
+<table class="table table-bordered my-5">
   <thead>
     <tr>
       <th scope="col">Food</th>
@@ -43,8 +43,8 @@
       <td><%= food.measurement_unit %></td>
       <td><%= food.price %></td>
       <td>
-        <% if can?(:delete, @food) %>
-          <%= button_to "Delete this food", @food, method: :delete, class:"btn btn-danger my-3" %>
+        <% if can?(:delete, food) %>
+          <%= button_to "Delete this food", food, method: :delete, class:"btn btn-danger my-3" %>
         <% end %>
       <td>
     </tr>

@@ -4,7 +4,7 @@
 </div>
 <ul>
   <% @public_recipes.each do |recipe| %>
-    <li class="recipe-card">
+    <li class="recipe-card my-5">
     <div class="recipe-main">
     <h2><%= link_to recipe.name, recipe %></h2>
     <h4>By <%= recipe.user.name %></h4>

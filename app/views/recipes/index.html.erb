@@ -1,49 +1,22 @@
-<% if user_signed_in? %>
-  <% content_for :title, "Recipes" %>
-  <h1>Recipes</h1>
-<% else %>
-  <% content_for :title, "Public Recipes List" %>
-  <h1>Public Recipes</h1>
-<% end %>
+<% content_for :title, "Recipes" %>
+<h1>Recipes</h1>
 
 <% if user_signed_in? %>
   <%= link_to raw('<i class="fas fa-plus"></i> New recipe'), new_recipe_path, class: "btn btn-outline-secondary" %>
 <% end %>
 
-<div class="row my-5">
+<div class="my-5">
   <% @recipes.each do |recipe| %>
-    <% if !user_signed_in? %>
-      <div class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-          <div class="col p-4 d-flex flex-column position-static">
-            <h3 class="mb-0"><%= recipe.name %></h3>
-            <div class="mb-1 text-body-secondary"><%= recipe.created_at.strftime('%d %b %y') %></div>
-            <p class="card-text mb-ato">Preparation time: <%= recipe.preparation_time %></p>
-            <p class="card-text mb-ato">Cooking time: <%= recipe.cooking_time %></p>
-            <i class="d-inline-block mb-2 text-primary-emphasis">Created by: <%= recipe.user.name %></i>
-            <%= link_to "Show this recipe", recipe, class:"icon-link gap-1 icon-link-hover stretched-link" %>
-          </div>
-          <div class="col-auto d-none d-lg-block">
-            <img src="https://scalebranding.com/wp-content/uploads/2020/03/fun-food-logo-1080x1080.jpg" alt="logo" class="bd-placeholder-img" width="250" height="250" />
-          </div>
+    <%= link_to recipe_path(recipe), class:"text-dark link-offset-2 link-underline link-underline-opacity-0" do %>
+      <div class="row g-0 border p-4 my-3">
+        <div class="col-md-6">
+          <h3><%= recipe.name %></h3>
+          <% if can?(:edit, recipe) %>
+            <%= button_to "Delete this recipe", recipe, method: :delete, class: "btn btn-danger my-3" %>
+          <% end %>
         </div>
-      </div>
-    <% end %>
-
-    <% if user_signed_in? %>
-      <div class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-          <div class="col p-4 d-flex flex-column position-static">
-            <h3 class="mb-0"><%= recipe.name %></h3>
-            <div class="mb-1 text-body-secondary"><%= recipe.created_at.strftime('%d %b %y') %></div>
-            <p class="card-text mb-ato">Preparation time: <%= recipe.preparation_time %></p>
-            <p class="card-text mb-ato">Cooking time: <%= recipe.cooking_time %></p>
-            <i class="d-inline-block mb-2 text-primary-emphasis">Created by: <%= recipe.user.name %></i>
-            <%= link_to raw('Show this recipe <i class="fa fa-chevron-right"></i>'), recipe, class:"icon-link gap-1 icon-link-hover stretched-link" %>
-          </div>
-          <div class="col-auto d-none d-lg-block">
-            <img src="https://scalebranding.com/wp-content/uploads/2020/03/fun-food-logo-1080x1080.jpg" alt="logo" class="bd-placeholder-img" width="250" height="250" />
-          </div>
+        <div class="col-md-6">
+          <p><%= recipe.description %></p>
         </div>
       </div>
     <% end %>
