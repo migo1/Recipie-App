@@ -17,6 +17,7 @@ RSpec.describe RecipesController, type: :request do
 end
 
 RSpec.describe RecipesController, type: :controller do
+  include Devise::Test::ControllerHelpers
   describe 'GET #index' do
     it 'responds with a 200 status code' do
       get :index

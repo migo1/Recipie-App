@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe ShoppingListsController, type: :controller do
   # Assuming you're using Devise for user authentication, let's sign in a user for these tests
+  include Devise::Test::ControllerHelpers
   let(:user) { FactoryBot.create(:user) }
 
   before do
