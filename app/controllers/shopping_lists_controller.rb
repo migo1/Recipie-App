@@ -1,9 +1,10 @@
 class ShoppingListsController < ApplicationController
   def show
     @missing_foods = generate_missing_foods_list(current_user)
-    @total_missing_items = @missing_foods.count
+    @total_missing_items = calculate_total_missing_items(@missing_foods)
     @total_missing_price = calculate_total_missing_price(@missing_foods)
-    @show ||= [] # Ensure @missing_foods is not nil
+    # Ensure @missing_foods is not nil
+    @show ||= []
   end
 
   private
@@ -19,9 +20,11 @@ class ShoppingListsController < ApplicationController
     end
   end
 
+  def calculate_total_missing_items(missing_foods)
+    missing_foods.count
+  end
+
   def calculate_total_missing_price(missing_foods)
-    # Implement the logic to calculate the total price of the missing food items
-    # You can sum the prices of the missing foods
     missing_foods.sum(&:price)
   end
 end
