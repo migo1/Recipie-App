@@ -6,11 +6,14 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.all.order(created_at: :desc)
   end
 
   # GET /recipes/1 or /recipes/1.json
-  def show; end
+  def show
+    @recipe = Recipe.find(params[:id])
+    @user_foods = Food.all
+  end
 
   # GET /recipes/new
   def new
@@ -67,6 +70,13 @@ class RecipesController < ApplicationController
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # recipes_controller.rb
+  def toggle
+    @recipe = Recipe.find(params[:id])
+    @recipe.update(public: !@recipe.public)
+    redirect_to @recipe, notice: "Recipe is now #{@recipe.public ? 'public' : 'private'}"
   end
 
   private

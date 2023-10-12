@@ -1,6 +1,10 @@
-<% content_for :title, "Public Recipes List" %>
-
-<h1>Public Recipes List</h1>
+<% if user_signed_in? %>
+  <% content_for :title, "Recipes" %>
+  <h1>Recipes</h1>
+<% else %>
+  <% content_for :title, "Public Recipes List" %>
+  <h1>Public Recipes</h1>
+<% end %>
 
 <% if user_signed_in? %>
   <%= link_to raw('<i class="fas fa-plus"></i> New recipe'), new_recipe_path, class: "btn btn-outline-secondary" %>
