@@ -4,7 +4,7 @@ class ShoppingListsController < ApplicationController
     @total_missing_items = calculate_total_missing_items(@missing_foods)
     @total_missing_price = calculate_total_missing_price(@missing_foods)
     # Ensure @missing_foods is not nil
-    @missing_foods ||= []
+    @show ||= []
   end
 
   private
