@@ -33,7 +33,7 @@
     <%= link_to "Generate Shopping List", shopping_list_path, class: 'btn btn-outline-secondary' %>
   <% end %>
   <% if can?(:edit, @recipe) %>
-    <a href="<%= new_food_recipes_food_path(@recipe) %>" class="btn btn-outline-secondary my-3">Add ingredient</a>
+    <a href="<%= new_recipe_recipes_food_path(@recipe) %>" class="btn btn-outline-secondary my-3">Add ingredient</a>
   <% end %>
 </div>
 

@@ -1,16 +1,16 @@
 class RecipesFoodsController < ApplicationController
-  before_action :find_food
+  before_action :find_recipe
 
   def new
-    @recipe_food = RecipeFood.new(food_id: @food.id)
-    @recipes = Recipe.all
+    @recipe_food = RecipeFood.new(recipe_id: @recipe.id)
+    @foods = Food.all
   end
 
   def create
     @recipes_food = RecipeFood.new(recipe_food_params)
-    @recipes = Recipe.all
+    @foods = Food.all
     if @recipes_food.save
-      redirect_to food_path(@food)
+      redirect_to recipe_path(@recipe), notice: 'Ingridient was successfully created.'
     else
       render :new
     end
@@ -22,7 +22,7 @@ class RecipesFoodsController < ApplicationController
     params.require(:recipe_food).permit(:recipe_id, :quantity, :food_id)
   end
 
-  def find_food
-    @food = Food.find(params[:food_id])
+  def find_recipe
+    @recipe = Recipe.find(params[:recipe_id])
   end
 end

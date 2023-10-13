@@ -7,10 +7,9 @@ Rails.application.routes.draw do
     member do
       patch :toggle
     end
-  end
-  resources :foods do 
     resources :recipes_foods, only: [:new, :create]
   end
+  resources :foods 
   # devise_for :users
   devise_for :users, sign_out_via: [:get, :delete]
 

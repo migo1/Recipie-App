@@ -1,10 +1,10 @@
-<%= form_with(model: @recipe_food, url: food_recipes_foods_path(@food)) do |form| %>
+<%= form_with(model: @recipe_food, url: recipe_recipes_foods_path(@recipe)) do |form| %>
 
-  <%= form.hidden_field :food_id, value: @food.id %>
+  <%= form.hidden_field :recipe_id, value: @recipe.id %>
 
   <div class="form-field my-3">
-  <%= form.label :recipe_id, style: "display: block" %>
-    <%= form.collection_select :recipe_id, @recipes, :id, :name, prompt: "Select a recipe", class: "form-control my-2 mb-2" %>
+  <%= form.label :food_id, style: "display: block" %>
+    <%= form.collection_select :food_id, @foods, :id, :name, prompt: "Select a food", class: "form-control my-2 mb-2" %>
   </div>
 
    <div class="form-field my-3">
