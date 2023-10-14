@@ -1,0 +1,29 @@
+<% content_for :title, "#{@food.name}" %>
+
+<div class="row my-5">
+  <div class="col-md-12">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <h3 class="mb-0"><%= @food.name %></h3>
+        <div class="mb-1 text-body-secondary"><%= @food.created_at.strftime('%d %b %y') %></div>
+        <p class="card-text mb-ato">Price: $<%= @food.price %></p>
+        <i class="d-inline-block mb-2 text-primary-emphasis">Created by: <%= @food.user.name %></i>
+        <div class="d-flex gap-5 mt-3">
+        <% if can?(:edit, @food) %>
+          <%= link_to "Edit this food", edit_food_path(@food) %>
+        <% end %>
+          <%= link_to "Back to foods", foods_path %>
+        </div>
+        <% if can?(:delete, @food) %>
+          <%= button_to "Delete this food", @food, method: :delete, class:"btn btn-danger my-3" %>
+        <% end %>
+      </div>
+      <div class="col-auto d-none d-lg-block">
+        <img src="https://scalebranding.com/wp-content/uploads/2020/03/fun-food-logo-1080x1080.jpg" alt="logo" class="bd-placeholder-img" width="250" height="250" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

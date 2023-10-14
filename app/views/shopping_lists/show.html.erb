@@ -1,0 +1,43 @@
+<!-- app/views/shopping_lists/show.html.erb -->
+
+<h1 class="text-center">Shopping List</h1>
+
+<div class="d-flex justify-content-between my-5">
+  <h3>Amount of food items to buy <%= @total_missing_items   %></h3>
+  <h3>Total value of food needed <%= number_to_currency(@total_missing_price) %></h3>
+</div>
+
+<div class="row my-5">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Food</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @missing_foods.present? %>
+          <% @missing_foods.each_with_index do |food, index| %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= food.name %></td>
+              <td><%= food.quantity %></td>
+              <td>$<%= food.price %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="4" class="text-center">No missing food items found.</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= link_to 'Go Back', 'javascript:history.go(-1)', class: 'btn btn-primary' %>
+
+
