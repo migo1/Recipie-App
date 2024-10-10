@@ -1,0 +1,32 @@
+<% content_for :title, "Welcome to recipe app" %>
+
+<div class="position-relative overflow-hidden my-md-3 text-center bg-black text-white">
+  <div class="col-md-6 p-lg-5 mx-auto my-5">
+    <h1 class="display-3 fw-bold">Designed for engineers</h1>
+    <h3 class="fw-normal text-white mb-3">Build anything you want with Aperture</h3>
+  </div>
+  <div class="product-device shadow-sm d-none d-md-block"></div>
+  <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+</div>
+
+<h1>Foods</h1>
+
+<div class="row my-5">
+  <% @all_food.each do |food| %>
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0"><%= food.name %></h3>
+          <div class="mb-1 text-body-secondary"><%= food.created_at.strftime('%d %b %y') %></div>
+          <p class="card-text mb-ato">Price: $<%= food.price %></p>
+          <i class="d-inline-block mb-2 text-primary-emphasis">Created by: <%= food.user.name %></i>
+          <%= link_to "Show this food", food, class:"icon-link gap-1 icon-link-hover stretched-link" %>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img src="https://scalebranding.com/wp-content/uploads/2020/03/fun-food-logo-1080x1080.jpg" alt="logo" class="bd-placeholder-img" width="250" height="250" />
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
